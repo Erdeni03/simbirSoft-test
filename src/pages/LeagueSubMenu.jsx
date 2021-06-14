@@ -2,31 +2,26 @@ import {useParams, Link, Switch, Route} from "react-router-dom"
 import {useEffect} from "react"
 import {SoccerStatContext} from "../context/context"
 import {useContext} from "react"
-import {getAllTeams, getLeaguesAllMatches} from "../api/api"
+import {getLeaguesAllMatches} from "../api/api"
 import {Teams} from "./Teams"
 import {LeagueWithCalendar} from "./LeagueWithCalendar"
-import {Menu, Typography, DatePicker} from "antd"
+import {Menu, Typography, message} from "antd"
 
 const {Title} = Typography
-const {RangePicker} = DatePicker
 
 export const LeagueSubMenu = () => {
-  const {setTeams, setLeaguesMatches, resetLoading} =
-    useContext(SoccerStatContext)
+  const {setLeaguesMatches, resetLoading} = useContext(SoccerStatContext)
 
   const {id} = useParams()
 
   useEffect(() => {
-    getAllTeams(id).then(data => {
-      setTeams(data.teams)
-    })
-    return resetLoading()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
-  useEffect(() => {
-    getLeaguesAllMatches(id).then(data => {
-      setLeaguesMatches(data.matches)
-    })
+    getLeaguesAllMatches(id)
+      .then(data => {
+        setLeaguesMatches(data.matches)
+      })
+      .catch(error => {
+        message.error("ОШИБКА СЕРВЕРА, ПОПРОБУЙТЕ ЧУТЬ ПОЗЖЕ!")
+      })
     return resetLoading()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
@@ -60,11 +55,6 @@ export const LeagueSubMenu = () => {
 
         <Route
           path="/competitions/:id/overview/matches"
-          component={LeagueWithCalendar}
-        />
-
-        <Route
-          path="/competitions/:id/overview/matches/"
           component={LeagueWithCalendar}
         />
       </Switch>

@@ -1,10 +1,12 @@
 import axios from "axios"
-const API_KEY = "2292eb8b857e4c1f8a05f17b00fd47df"
+
+let token = localStorage.getItem("token")
+if (!token) token = "8c4f30d4f4354979ac043901839c7664"
 
 const API = axios.create({
   baseURL: "https://api.football-data.org/v2",
   headers: {
-    "X-Auth-Token": API_KEY
+    "X-Auth-Token": token
   }
 })
 export {API}

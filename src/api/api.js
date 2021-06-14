@@ -11,27 +11,27 @@ const getAllTeams = async id => {
   return await res.data
 }
 const getLeaguesAllMatches = async id => {
-  const res = await API.get(`competitions/${id}/matches`)
+  const res = await API.get(`${PATH.COMPETITIONS}/${id}${PATH.MATCHES}`)
   return await res.data
 }
 
 const getLeaguesCalendarByPeriod = async (id, dateFrom, dateTo) => {
   const res = await API.get(
-    `competitions/${id}/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`
+    `${PATH.COMPETITIONS}/${id}${PATH.MATCHES}?dateFrom=${dateFrom}&dateTo=${dateTo}`
   )
   return await res.data
 }
 
 const getTeamCalendar = async id => {
-  const res = await API.get(`teams/${id}/matches`)
-  return await res.json()
+  const res = await API.get(`${PATH.TEAMS}/${id}${PATH.MATCHES}`)
+  return await res.data
 }
 
 const getTeamCalendarByPeriod = async (id, dateFrom, dateTo) => {
   const res = await API.get(
-    `teams/${id}/matches?dateFrom=${dateFrom}&dateTo=${dateTo}`
+    `${PATH.TEAMS}/${id}${PATH.MATCHES}?dateFrom=${dateFrom}&dateTo=${dateTo}`
   )
-  return await res.json()
+  return await res.data
 }
 
 export {
@@ -39,5 +39,6 @@ export {
   getAllTeams,
   getLeaguesAllMatches,
   getLeaguesCalendarByPeriod,
-  getTeamCalendarByPeriod
+  getTeamCalendarByPeriod,
+  getTeamCalendar
 }

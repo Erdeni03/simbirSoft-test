@@ -1,5 +1,6 @@
+import {Typography} from "antd"
 function NotFound() {
-  return <h2>Page Not Found</h2>
+  return <Typography.Title level={2}>Страница не найдена</Typography.Title>
 }
 
 export {NotFound}

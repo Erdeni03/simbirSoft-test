@@ -5,6 +5,7 @@ export const reducer = (state, {type, payload}) => {
         ...state,
         loading: true
       }
+
     case "SET_TEAMS":
       return {
         ...state,
@@ -21,6 +22,12 @@ export const reducer = (state, {type, payload}) => {
       return {
         ...state,
         leguesMatches: payload || [],
+        loading: false
+      }
+    case "SET_TEAM_MATCHES":
+      return {
+        ...state,
+        teamMatches: payload || [],
         loading: false
       }
     case "FILTERED_LEAGUES_MATCHES":

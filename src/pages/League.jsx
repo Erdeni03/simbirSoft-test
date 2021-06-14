@@ -4,7 +4,7 @@ import {SoccerStatContext} from "../context/context"
 import {useContext, useState} from "react"
 import {Loader} from "../components/Loader"
 import {Link, useHistory, useLocation} from "react-router-dom"
-import {Card, List, Image} from "antd"
+import {Card, List, Image, message} from "antd"
 import {SetSearch} from "../components/SetSearch"
 
 const {Meta} = Card
@@ -15,7 +15,7 @@ function League() {
     useContext(SoccerStatContext)
   const {push} = useHistory()
   const {pathname, search} = useLocation()
-  console.log(useLocation())
+
   const handleSearch = str => {
     setFilteredLeague(
       leagues.filter(item =>
@@ -28,20 +28,28 @@ function League() {
     })
   }
   useEffect(() => {
-    getAllLeagues().then(data => {
-      setLeagues(data.competitions)
-      setFilteredLeague(
-        search
-          ? data.competitions.filter(item =>
-              item.name
-                .toLowerCase()
-                .includes(search.split("=")[1].toLowerCase())
-            )
-          : data.competitions
-      )
-    })
+    localStorage.getItem("token")
+  })
+  useEffect(() => {
+    getAllLeagues()
+      .then(data => {
+        setLeagues(data.competitions)
+        setFilteredLeague(
+          search
+            ? data.competitions.filter(item =>
+                item.name
+                  .toLowerCase()
+                  .includes(search.split("=")[1].toLowerCase())
+              )
+            : data.competitions
+        )
+      })
+      .catch(error => {
+        message.error("ОШИБКА СЕРВЕРА, ПОПРОБУЙТЕ ЧУТЬ ПОЗЖЕ!")
+      })
 
     return resetLoading()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   return (

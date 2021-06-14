@@ -8,7 +8,7 @@ import App from "./App"
 
 ReactDOM.render(
   <ContextProvider>
-    <Router>
+    <Router basename="/simbirSoft-test">
       <App />
     </Router>
   </ContextProvider>,

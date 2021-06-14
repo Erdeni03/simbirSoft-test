@@ -1,10 +1,7 @@
-import {useState} from "react"
 import {Input} from "antd"
 
 const {Search} = Input
 function SetSearch({cb}) {
-  const [value, setValue] = useState("")
-
   const onSearch = value => cb(value)
   return (
     <Search
