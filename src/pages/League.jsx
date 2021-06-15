@@ -71,7 +71,7 @@ function League() {
           dataSource={filteredLeague}
           renderItem={item => (
             <List.Item>
-              <Link to={`/competitions/${item.id}/overview/teams`}>
+              <Link to={`/leagues/${item.id}/overview/teams`}>
                 <Card
                   hoverable
                   style={{width: 200}}

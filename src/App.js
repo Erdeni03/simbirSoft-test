@@ -6,8 +6,9 @@ import {League} from "./pages/League"
 import {TeamWithCalendar} from "./pages/TeamWithCalendar"
 import {Home} from "./pages/Home"
 import {NotFound} from "./pages/NotFound"
-import {Layout, Menu, Breadcrumb} from "antd"
+import {Layout, Menu} from "antd"
 import {GithubOutlined} from "@ant-design/icons"
+import {BreadCrumb} from "./components/BreadCrumb"
 
 const {Header, Content, Footer} = Layout
 function App() {
@@ -31,7 +32,7 @@ function App() {
           style={{justifyContent: "flex-end"}}
         >
           <Menu.Item key="1" style={{fontSize: 20}}>
-            <Link to="/competitions">Cписок лиг</Link>
+            <Link to="/leagues">Cписок лиг</Link>
           </Menu.Item>
         </Menu>
       </Header>
@@ -42,23 +43,20 @@ function App() {
           marginTop: 64
         }}
       >
-        <Breadcrumb style={{margin: "16px 0"}}>
+        {/* <Breadcrumb style={{margin: "16px 0"}}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-
+        </Breadcrumb> */}
+        <BreadCrumb />
         <div
           className="site-layout-background"
           style={{padding: 24, minHeight: "70vh"}}
         >
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/competitions" exact component={League} />
-            <Route
-              path="/competitions/:id/overview"
-              component={LeagueSubMenu}
-            />
+            <Route path="/leagues" exact component={League} />
+            <Route path="/leagues/:id/overview" component={LeagueSubMenu} />
             <Route path="/teams/:id/matches" component={TeamWithCalendar} />
             <Route component={NotFound} />
           </Switch>

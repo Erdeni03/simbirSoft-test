@@ -82,9 +82,7 @@ export const TeamWithCalendar = () => {
       <Link to={`teams/${id}/matches?dateFrom=${value[0]}&dateTo=${value[1]}`}>
         <Button type="primary">Фильтр</Button>
       </Link>
-      {/* <Route
-        path={`/competitions/:id/overview/matches?:dateFrom=${value[0]}&dateTo=`}
-      /> */}
+
       <Table columns={columns} dataSource={dataSource} />
     </>
   )

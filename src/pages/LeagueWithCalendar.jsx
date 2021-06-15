@@ -1,19 +1,30 @@
 import {useEffect, useState, useContext} from "react"
-import {useParams, useHistory, Link} from "react-router-dom"
-import {getLeaguesCalendarByPeriod} from "../api/api"
+import {useParams, Link} from "react-router-dom"
+import {getLeaguesAllMatches} from "../api/api"
 import {SoccerStatContext} from "../context/context"
 
-import {Table, Space, DatePicker, Button} from "antd"
+import {Table, Space, DatePicker, Button, message} from "antd"
 
 const {RangePicker} = DatePicker
 
 export const LeagueWithCalendar = () => {
   const [value, setValue] = useState([])
-  let history = useHistory()
 
   const {id} = useParams()
-  console.log(history)
-  const {leguesMatches, setLeaguesMatches} = useContext(SoccerStatContext)
+  useEffect(() => {
+    getLeaguesAllMatches(id)
+      .then(data => {
+        console.log(data)
+        setLeaguesMatches(data.matches)
+      })
+      .catch(error => {
+        message.error("ОШИБКА СЕРВЕРА, ПОПРОБУЙТЕ ЧУТЬ ПОЗЖЕ!")
+      })
+    return resetLoading()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
+  const {leguesMatches, setLeaguesMatches, resetLoading} =
+    useContext(SoccerStatContext)
   const dataSource = leguesMatches.map(item => ({...item, key: item.id}))
   const columns = [
     {
@@ -45,26 +56,7 @@ export const LeagueWithCalendar = () => {
       key: "away",
       render: text => <p>{text.name}</p>
     },
-    //  {
-    //    title: "Tags",
-    //    key: "tags",
-    //    dataIndex: "tags",
-    //    render: tags => (
-    //      <>
-    //        {tags.map(tag => {
-    //          let color = tag.length > 5 ? "geekblue" : "green"
-    //          if (tag === "loser") {
-    //            color = "volcano"
-    //          }
-    //          return (
-    //            <Tag color={color} key={tag}>
-    //              {tag.toUpperCase()}
-    //            </Tag>
-    //          )
-    //        })}
-    //      </>
-    //    )
-    //  },
+
     {
       title: "Status",
       key: "status",
@@ -79,15 +71,14 @@ export const LeagueWithCalendar = () => {
     setValue(date)
   }
 
-  useEffect(() => {
-    if (value.length) {
-      getLeaguesCalendarByPeriod(id, value[0], value[1]).then(data => {
-        console.log(data.matches)
-        setLeaguesMatches(data.matches)
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  // useEffect(() => {
+  //   if (value.length) {
+  //     getLeaguesCalendarByPeriod(id, value[0], value[1]).then(data => {
+  //       setLeaguesMatches(data.matches)
+  //     })
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [id])
   return (
     <>
       <RangePicker
@@ -98,9 +89,7 @@ export const LeagueWithCalendar = () => {
       <Link to={`teams/${id}/matches?dateFrom=${value[0]}&dateTo=${value[1]}`}>
         <Button type="primary">Фильтр</Button>
       </Link>
-      {/* <Route
-        path={`/competitions/:id/overview/matches?:dateFrom=${value[0]}&dateTo=`}
-      /> */}
+
       <Table columns={columns} dataSource={dataSource} />
     </>
   )

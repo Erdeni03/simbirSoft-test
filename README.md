@@ -1,3 +1,7 @@
+# Проект на данный момент недоработан
+
+## [Ссылка на рабочее приложение](https://erdeni03.github.io/simbirSoft-test/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
