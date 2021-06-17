@@ -1,4 +1,4 @@
-# React
+# React SPA SoccerStat
 ## [Ссылка на рабочее приложение](https://erdeni03.github.io/simbirSoft-test/)
 
 ### UI library: Ant-Design
