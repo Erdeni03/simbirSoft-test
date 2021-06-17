@@ -8,7 +8,6 @@ function SetSearch({cb}) {
       placeholder="Поиск..."
       allowClear
       enterButton="Search"
-      // value={value}
       size="large"
       onSearch={onSearch}
       style={{marginBottom: 20}}

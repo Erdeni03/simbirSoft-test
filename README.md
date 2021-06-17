@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 # Проект на данный момент недоработан
 
 ## [Ссылка на рабочее приложение](https://erdeni03.github.io/simbirSoft-test/)
-=======
-# [Ссылка на рабочее приложение](https://erdeni03.github.io/simbirSoft-test/)
->>>>>>> 6829ef584cf7d400c33889d525ed637a67b5225e
 
 # Getting Started with Create React App
 

@@ -9,8 +9,8 @@ import {Card, List, message} from "antd"
 
 const {Meta} = Card
 function Teams() {
+  const [arr, setArr] = useState([])
   const {teams, loading, setTeams, resetLoading} = useContext(SoccerStatContext)
-  const [arr, serArr] = useState([])
   const {push} = useHistory()
   const {id} = useParams()
   const {pathname, search} = useLocation()
@@ -24,10 +24,11 @@ function Teams() {
       search: `search=${str}`
     })
   }
+
   useEffect(() => {
     getAllTeams(id)
       .then(data => {
-        serArr(data.teams)
+        setArr(data.teams)
         setTeams(
           search
             ? // eslint-disable-next-line array-callback-return
@@ -40,11 +41,13 @@ function Teams() {
         )
       })
       .catch(error => {
-        message.error("ОШИБКА СЕРВЕРА, ПОПРОБУЙТЕ ЧУТЬ ПОЗЖЕ!")
+        message.error(error.name + ": " + error.message)
       })
-    return resetLoading()
+    return () => {
+      resetLoading()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [id, search])
   return (
     <>
       <SetSearch cb={handleSearch} />

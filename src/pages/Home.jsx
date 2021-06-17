@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import {Card, Typography, Input, Button} from "antd"
 
 import {UserOutlined} from "@ant-design/icons"
@@ -11,6 +11,9 @@ export const Home = () => {
     localStorage.setItem("token", value)
     setValue("")
   }
+  useEffect(() => {
+    if (value) localStorage.getItem("token", value)
+  }, [value])
 
   return (
     <div
@@ -40,7 +43,11 @@ export const Home = () => {
           По умолчанию используется мой токен:
         </Typography.Text>
         <br />
-        <Typography.Text mark>2292eb8b857e4c1f8a05f17b00fd47df</Typography.Text>
+        <Typography.Text mark>{token}</Typography.Text>
+        <br />
+        <Typography.Text strong>
+          После установки токена, пожалуйста перезагрузите сайт
+        </Typography.Text>
       </Card>
     </div>
   )

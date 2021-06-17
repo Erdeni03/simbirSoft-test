@@ -1,9 +1,9 @@
 import {Switch, Route, Link} from "react-router-dom"
 import {useEffect} from "react"
 
-import {LeagueSubMenu} from "./pages/LeagueSubMenu"
 import {League} from "./pages/League"
-import {TeamWithCalendar} from "./pages/TeamWithCalendar"
+import {LeaguesList} from "./pages/LeaguesList"
+import {TeamMatches} from "./pages/TeamMatches"
 import {Home} from "./pages/Home"
 import {NotFound} from "./pages/NotFound"
 import {Layout, Menu} from "antd"
@@ -43,11 +43,6 @@ function App() {
           marginTop: 64
         }}
       >
-        {/* <Breadcrumb style={{margin: "16px 0"}}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb> */}
         <BreadCrumb />
         <div
           className="site-layout-background"
@@ -55,9 +50,9 @@ function App() {
         >
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/leagues" exact component={League} />
-            <Route path="/leagues/:id/overview" component={LeagueSubMenu} />
-            <Route path="/teams/:id/matches" component={TeamWithCalendar} />
+            <Route path="/leagues" exact component={LeaguesList} />
+            <Route path="/leagues/:id/overview" component={League} />
+            <Route path="/teams/:id/matches" component={TeamMatches} />
             <Route component={NotFound} />
           </Switch>
         </div>

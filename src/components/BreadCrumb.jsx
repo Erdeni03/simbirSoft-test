@@ -1,10 +1,9 @@
-import {useLocation, Link, useHistory} from "react-router-dom"
+import {useLocation, Link} from "react-router-dom"
 import {Breadcrumb} from "antd"
 
 export const BreadCrumb = () => {
   const location = useLocation()
-  let history = useHistory()
-  console.log(history)
+
   const breadCrumbView = () => {
     const {pathname} = location
     const pathnames = pathname.split("/").filter(item => item)

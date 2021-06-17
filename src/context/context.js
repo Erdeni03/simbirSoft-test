@@ -8,7 +8,6 @@ const initialState = {
   teams: [],
   leguesMatches: [],
   teamMatches: [],
-  filteredLeguesMatches: [],
 
   loading: true
 }
@@ -16,7 +15,7 @@ const initialState = {
 export const ContextProvider = ({children}) => {
   const [value, dispatch] = useReducer(reducer, initialState)
   value.resetLoading = load => {
-    dispatch({type: "RESET_LOADING", payload: load})
+    dispatch({type: "RESET_LOADING"})
   }
 
   value.setTeams = data => {
@@ -31,9 +30,7 @@ export const ContextProvider = ({children}) => {
   value.setTeamMatches = data => {
     dispatch({type: "SET_TEAM_MATCHES", payload: data})
   }
-  value.filteredLeaguesMatches = data => {
-    dispatch({type: "FILTERED_LEAGUES_MATCHES", payload: data})
-  }
+
   return (
     <SoccerStatContext.Provider value={value}>
       {children}

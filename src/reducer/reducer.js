@@ -30,12 +30,7 @@ export const reducer = (state, {type, payload}) => {
         teamMatches: payload || [],
         loading: false
       }
-    case "FILTERED_LEAGUES_MATCHES":
-      return {
-        ...state,
-        filteredLeguesMatches: payload || [],
-        loading: false
-      }
+
     default:
       return state
   }
