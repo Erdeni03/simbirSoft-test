@@ -28,9 +28,13 @@ export const LeagueMatches = () => {
         id,
         search.split("=")[1].split("&")[0],
         search.split("=")[2]
-      ).then(data => {
-        setLeaguesMatches(data.matches)
-      })
+      )
+        .then(data => {
+          setLeaguesMatches(data.matches)
+        })
+        .catch(error => {
+          message.error(error.name + ": " + error.message)
+        })
     }
 
     return () => {
@@ -44,9 +48,13 @@ export const LeagueMatches = () => {
   }
 
   const asyncFunc = () => {
-    getLeaguesCalendarByPeriod(id, dateValue[0], dateValue[1]).then(data => {
-      setLeaguesMatches(data.matches)
-    })
+    getLeaguesCalendarByPeriod(id, dateValue[0], dateValue[1])
+      .then(data => {
+        setLeaguesMatches(data.matches)
+      })
+      .catch(error => {
+        message.error(error.name + ": " + error.message)
+      })
     push({
       pathname,
       search: `dateFrom=${dateValue[0]}&dateTo=${dateValue[1]}`

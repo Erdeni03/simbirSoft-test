@@ -48,9 +48,13 @@ export const TeamMatches = () => {
   }
 
   const asyncFunc = () => {
-    getTeamCalendarByPeriod(id, dateValue[0], dateValue[1]).then(data => {
-      setTeamMatches(data.matches)
-    })
+    getTeamCalendarByPeriod(id, dateValue[0], dateValue[1])
+      .then(data => {
+        setTeamMatches(data.matches)
+      })
+      .catch(error => {
+        message.error(error.name + ": " + error.message)
+      })
     push({
       pathname,
       search: `dateFrom=${dateValue[0]}&dateTo=${dateValue[1]}`
